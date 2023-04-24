@@ -1,4 +1,4 @@
-import config from './dbconfig.js'
+import config from './../../dbconfig.js'
 import sql from 'mssql'
 
 class PizzaService {
@@ -9,12 +9,12 @@ class PizzaService {
             let pool = await sql.connect(config);
             let result = await pool.request()
                                 .query('SELECT * FROM Pizzas');
-            returnEntity = result.recordsets[0][0]
+            returnEntity = result.recordsets[0]
 
         } catch (error) {
             console.log(error)
         }
-        returnEntity;
+        return returnEntity;
 
     }
 
@@ -24,14 +24,14 @@ class PizzaService {
         try {
             let pool = await sql.connect(config);
             let result = await pool.request()
-                                .input(pId, sql.Int, id)
+                                .input("pId", sql.Int, id)
                                 .query('SELECT * FROM Pizzas WHERE id = @pId');
             returnEntity = result.recordsets[0][0]
 
         } catch (error) {
             console.log(error)
         }
-        returnEntity;
+        return returnEntity;
     }
 
     insert = async (pizza) => {
