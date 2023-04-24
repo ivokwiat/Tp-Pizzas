@@ -40,11 +40,11 @@ class PizzaService {
         try{
             let pool = await sql.connect(config);
             let result = await pool.request()
-                                .input('Nombre', sql.VarChar, pizza.nombre)
-                                .input('LibreGluten', sql.Bit, pizza.libreGluten)
-                                .input('Importe', sql.Float, pizza.importe)
-                                .input('Descripcion', sql.VarChar, pizza.descripcion)
-                                .query('SET NOCOUNT ON INSERT INTO Pizzas(Nombre, LibreGluten, Importe, Descripcion) VALUES (@Nombre,@LibreGluten,@Importe,@Descripcion');
+                                .input('pNombre', sql.VarChar, pizza.nombre)
+                                .input('pLibreGluten', sql.Bit, pizza.libreGluten)
+                                .input('pImporte', sql.Float, pizza.importe)
+                                .input('pDescripcion', sql.VarChar, pizza.descripcion)
+                                .query('INSERT INTO Pizzas(Nombre, LibreGluten, Importe, Descripcion) VALUES (@pNombre,@pLibreGluten,@pImporte,@pDescripcion)');
             rowsAffected = result.rowsAffected;
             console.log('Pizza creada')
 
